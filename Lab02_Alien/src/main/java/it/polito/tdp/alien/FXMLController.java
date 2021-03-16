@@ -45,20 +45,31 @@ public class FXMLController {
     	
     	String parola = txtParola.getText();
 
-    	if (parola.matches("[a-zA-Z\s]")) {
+    	if (parola.matches("[a-zA-Z\s?]+")) {
     		String[] parole = parola.split(" ");
     		if (parole.length==1 && pieno) {
-    			List<String> traduzione = dizionario.translateWord(parole[0]);
-    			txtResult.appendText("La traduzione della parola " + parole[0] + " é:\n");
-    			String[] traduzioni = (String[]) traduzione.toArray();
-    			for (String t : traduzioni) {
-    				txtResult.appendText(t + ".\n");
+    			if (parole[0].contains("?")) {
+    				return;
+    			}
+    			else {
+    				List<String> traduzione = dizionario.translateWord(parole[0]);
+    				txtResult.appendText("La traduzione della parola " + parole[0] + " é:\n");
+    				String[] traduzioni = new String[traduzione.size()];
+    				traduzioni = traduzione.toArray(traduzioni);
+    				for (String t : traduzioni) {
+    					txtResult.appendText(t + ".\n");
+    				}
     			}
     		}
     		else if (parole.length==2) {
+    			if (!parola.contains("?")) {
     			dizionario.addWord(parole[0], parole[1]);
     			txtResult.appendText("La parola " + parole[0] + " é stata correttamente inserita nel dizionario con il significato di " + parole[1] +".\n");
     			this.pieno = true;
+    			}
+    			else {
+    				txtResult.appendText("ERRORE: carattere ? consentito solo in ricerca.");
+    			}
     		}
     		else if (!pieno) {
     			txtResult.appendText("Inserisci almeno una parola in dizionario prima di poter tradurre.\n");
