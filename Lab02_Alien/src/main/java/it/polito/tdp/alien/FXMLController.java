@@ -1,6 +1,7 @@
 package it.polito.tdp.alien;
 
 import java.net.URL;
+import java.util.*;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,8 +48,12 @@ public class FXMLController {
     	if (parola.matches("[a-zA-Z\s]")) {
     		String[] parole = parola.split(" ");
     		if (parole.length==1 && pieno) {
-    			String traduzione = dizionario.translateWord(parole[0]);
-    			txtResult.appendText("La traduzione della parola " + parole[0] + " é " + traduzione + ".\n");
+    			List<String> traduzione = dizionario.translateWord(parole[0]);
+    			txtResult.appendText("La traduzione della parola " + parole[0] + " é:\n");
+    			String[] traduzioni = (String[]) traduzione.toArray();
+    			for (String t : traduzioni) {
+    				txtResult.appendText(t + ".\n");
+    			}
     		}
     		else if (parole.length==2) {
     			dizionario.addWord(parole[0], parole[1]);

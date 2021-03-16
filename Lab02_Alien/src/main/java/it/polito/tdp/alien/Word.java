@@ -1,22 +1,25 @@
 package it.polito.tdp.alien;
 
+import java.util.*;
+
 public class Word {
 	
 	private String alienWord;
-	private String translation;
+	private List<String> translation;
 	
 	public Word(String alienWord, String translation) {
 		super();
 		this.alienWord = alienWord;
-		this.translation = translation;
+		this.translation = new LinkedList<String>();
+		this.translation.add(translation);
 	}
 
-	public String getTranslation() {
+	public List<String> getTranslation() {
 		return translation;
 	}
 
 	public void setTranslation(String translation) {
-		this.translation = translation;
+		this.translation.add(translation);
 	}
 
 	public String getAlienWord() {

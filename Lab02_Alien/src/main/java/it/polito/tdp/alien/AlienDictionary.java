@@ -19,7 +19,7 @@ public class AlienDictionary {
 		}
 	}
 	
-	public String translateWord(String alienWord) {
+	public List<String> translateWord(String alienWord) {
 		return parole.get(alienWord).getTranslation();
 	}
 
