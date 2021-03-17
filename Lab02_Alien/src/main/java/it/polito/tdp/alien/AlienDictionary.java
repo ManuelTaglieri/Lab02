@@ -20,7 +20,10 @@ public class AlienDictionary {
 	}
 	
 	public List<String> translateWord(String alienWord) {
-		return parole.get(alienWord).getTranslation();
+		if (parole.get(alienWord)==null)
+			return null;
+		else
+			return parole.get(alienWord).getTranslation();
 	}
 
 	public LinkedHashMap<String, Word> getParole() {

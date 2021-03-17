@@ -56,6 +56,10 @@ public class FXMLController {
     				for (Word w : voci.values()) {
     					if (w.getAlienWord().matches(parole[0])) {
     						List<String> traduzione = dizionario.translateWord(w.getAlienWord());
+    						if (traduzione==null) {
+    	    					txtResult.appendText("La traduzione del termine " + w.getAlienWord() +" non è ancora presente.\n");
+    	    					return;
+    	    				}
     	    				txtResult.appendText("La traduzione della parola " + w.getAlienWord() + " é:\n");
     	    				String[] traduzioni = new String[traduzione.size()];
     	    				traduzioni = traduzione.toArray(traduzioni);
@@ -67,6 +71,10 @@ public class FXMLController {
     			}
     			else {
     				List<String> traduzione = dizionario.translateWord(parole[0]);
+    				if (traduzione==null) {
+    					txtResult.appendText("La traduzione del termine " + parole[0] +" non è ancora presente.\n");
+    					return;
+    				}
     				txtResult.appendText("La traduzione della parola " + parole[0] + " é:\n");
     				String[] traduzioni = new String[traduzione.size()];
     				traduzioni = traduzione.toArray(traduzioni);
