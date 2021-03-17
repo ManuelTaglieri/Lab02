@@ -23,4 +23,8 @@ public class AlienDictionary {
 		return parole.get(alienWord).getTranslation();
 	}
 
+	public LinkedHashMap<String, Word> getParole() {
+		return parole;
+	}
+
 }

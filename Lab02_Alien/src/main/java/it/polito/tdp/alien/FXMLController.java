@@ -46,10 +46,24 @@ public class FXMLController {
     	String parola = txtParola.getText();
 
     	if (parola.matches("[a-zA-Z\s?]+")) {
+    		parola = parola.toLowerCase();
     		String[] parole = parola.split(" ");
     		if (parole.length==1 && pieno) {
     			if (parole[0].contains("?")) {
-    				return;
+    				parole [0] = parole[0].replaceAll("\\?", ".");
+    				LinkedHashMap<String, Word> voci = dizionario.getParole();
+    				txtResult.appendText("Ecco le possibili corrispondenze con la parola incognita cercata:\n");
+    				for (Word w : voci.values()) {
+    					if (w.getAlienWord().matches(parole[0])) {
+    						List<String> traduzione = dizionario.translateWord(w.getAlienWord());
+    	    				txtResult.appendText("La traduzione della parola " + w.getAlienWord() + " é:\n");
+    	    				String[] traduzioni = new String[traduzione.size()];
+    	    				traduzioni = traduzione.toArray(traduzioni);
+    	    				for (String t : traduzioni) {
+    	    					txtResult.appendText(t + ".\n");
+    	    				}
+    					}
+    				}
     			}
     			else {
     				List<String> traduzione = dizionario.translateWord(parole[0]);
